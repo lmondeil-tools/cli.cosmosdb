@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "lmondeil.clitemplate": {
+      "commandName": "Project"
+    },
+    "select": {
+      "commandName": "Project",
+      "commandLineArgs": "select offer \"SELECT TOP 2 c.id FROM c\""
+    },
+    "patch-many": {
+      "commandName": "Project",
+      "commandLineArgs": "patch-many customer increment \"/patched\" 1 --where \"WHERE IS_DEFINED(c.patched)\""
+    }
+  }
+}

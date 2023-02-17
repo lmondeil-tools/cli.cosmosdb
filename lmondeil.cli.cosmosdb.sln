@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lmondeil.cli.cosmosdb", "src\lmondeil.cli.cosmosdb\lmondeil.cli.cosmosdb.csproj", "{E5BBAB30-9BAC-4241-9CE8-CE1867A0084C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lmondeil.cli.cosmosdb.services", "src\lmondeil.cli.cosmosdb.services\lmondeil.cli.cosmosdb.services.csproj", "{23E63E25-D5BD-4B25-908E-EA11FE3C9081}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AB8F682D-C651-410B-827F-C8AA8D86068E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lmondeil.cli.cosmosdb.services.tests", "tests\lmondeil.cli.cosmosdb.services.tests\lmondeil.cli.cosmosdb.services.tests.csproj", "{456D4708-48FD-4AAD-A488-0F538BC4D7EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5BBAB30-9BAC-4241-9CE8-CE1867A0084C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5BBAB30-9BAC-4241-9CE8-CE1867A0084C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5BBAB30-9BAC-4241-9CE8-CE1867A0084C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5BBAB30-9BAC-4241-9CE8-CE1867A0084C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E63E25-D5BD-4B25-908E-EA11FE3C9081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E63E25-D5BD-4B25-908E-EA11FE3C9081}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E63E25-D5BD-4B25-908E-EA11FE3C9081}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E63E25-D5BD-4B25-908E-EA11FE3C9081}.Release|Any CPU.Build.0 = Release|Any CPU
+		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{456D4708-48FD-4AAD-A488-0F538BC4D7EF} = {AB8F682D-C651-410B-827F-C8AA8D86068E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D5C0A664-4D25-418B-8D37-908C834CE537}
+	EndGlobalSection
+EndGlobal
