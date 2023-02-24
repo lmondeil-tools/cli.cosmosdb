@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AB8F682D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lmondeil.cli.cosmosdb.services.tests", "tests\lmondeil.cli.cosmosdb.services.tests\lmondeil.cli.cosmosdb.services.tests.csproj", "{456D4708-48FD-4AAD-A488-0F538BC4D7EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lmondeil.cli.cosmosdb.models", "src\lmondeil.cli.cosmosdb.models\lmondeil.cli.cosmosdb.models.csproj", "{3417D373-37F7-421A-8D74-B2C094A4A930}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{456D4708-48FD-4AAD-A488-0F538BC4D7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3417D373-37F7-421A-8D74-B2C094A4A930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3417D373-37F7-421A-8D74-B2C094A4A930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3417D373-37F7-421A-8D74-B2C094A4A930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3417D373-37F7-421A-8D74-B2C094A4A930}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

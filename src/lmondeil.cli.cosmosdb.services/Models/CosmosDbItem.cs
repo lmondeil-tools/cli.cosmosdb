@@ -3,4 +3,4 @@
 
 using Microsoft.Azure.Cosmos;
 
-internal record CosmosDbItem(string Id,PartitionKey PartitionKey);
+public record CosmosDbItem(string Id,PartitionKey PartitionKey);

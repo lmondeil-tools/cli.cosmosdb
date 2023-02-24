@@ -1,7 +1,7 @@
 ﻿namespace lmondeil.cli.cosmosdb.Commands.CosmosDb;
 
 using lmondeil.cli.cosmosdb.Models.Settings;
-using lmondeil.cli.cosmosdb.services;
+using lmondeil.cli.cosmosdb.services.Repositories;
 
 using McMaster.Extensions.CommandLineUtils;
 

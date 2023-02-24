@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\lmondeil.cli.cosmosdb.services\lmondeil.cli.cosmosdb.services.csproj" />
+    <ProjectReference Include="..\..\src\lmondeil.cli.cosmosdb.services\lmondeil.cli.cosmosdb.services.csproj" />
   </ItemGroup>
 
 </Project>

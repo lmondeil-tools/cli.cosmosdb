@@ -1,4 +1,4 @@
-﻿namespace lmondeil.cli.cosmosdb.services
+﻿namespace lmondeil.cli.cosmosdb.services.Repositories
 {
     using lmondeil.cli.cosmosdb.services.Helpers;
     using lmondeil.cli.cosmosdb.services.Models;
@@ -23,13 +23,13 @@
                 ConnectionMode = ConnectionMode.Gateway
             });
 
-            this._container = client.GetContainer(database, containerName);
+            _container = client.GetContainer(database, containerName);
             _logger = logger;
         }
 
         public async IAsyncEnumerable<dynamic> SelectAsync(string query)
         {
-            FeedIterator<dynamic> iterator = this._container.GetItemQueryIterator<dynamic>(query);
+            FeedIterator<dynamic> iterator = _container.GetItemQueryIterator<dynamic>(query);
             while (iterator.HasMoreResults)
             {
                 foreach (dynamic item in await iterator.ReadNextAsync())
@@ -41,7 +41,7 @@
 
         public async Task<dynamic> GetItemByIdAsync(string id)
         {
-            FeedIterator<dynamic> iterator = this._container.GetItemQueryIterator<dynamic>($"SELECT * FROM c WHERE c.id = '{id}'");
+            FeedIterator<dynamic> iterator = _container.GetItemQueryIterator<dynamic>($"SELECT * FROM c WHERE c.id = '{id}'");
             dynamic result = null;
             while (iterator.HasMoreResults && result is null)
             {
@@ -55,27 +55,27 @@
         {
             foreach (var item in collection)
             {
-                var response = await this._container.UpsertItemAsync<dynamic>(item);
+                var response = await _container.UpsertItemAsync<dynamic>(item);
                 yield return response;
             }
         }
 
         public async Task<ItemResponse<dynamic>> UpsertAsync(dynamic item)
         {
-            return await this._container.UpsertItemAsync<dynamic>(item);
+            return await _container.UpsertItemAsync<dynamic>(item);
         }
 
         public async Task<HttpStatusCode> PatchAsync(string id, PartitionKey partitionKey, IEnumerable<PatchEntity> patchEntities)
         {
-            var response = await this._container.PatchItemAsync<dynamic>(id, partitionKey, patchEntities.Select(x => PatchOperationHelper.BuildFrom(x)).ToArray());
+            var response = await _container.PatchItemAsync<dynamic>(id, partitionKey, patchEntities.Select(x => PatchOperationHelper.BuildFrom(x)).ToArray());
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 string resourceString = response.Resource.ToString();
-                this._logger?.LogInformation("Patch was successfull : {response}", resourceString);
+                _logger?.LogInformation("Patch was successfull : {response}", resourceString);
             }
             else
             {
-                this._logger?.LogInformation("Patch failed : {response}", response.StatusCode);
+                _logger?.LogInformation("Patch failed : {response}", response.StatusCode);
             }
 
             return response.StatusCode;
@@ -86,7 +86,7 @@
             QueryDefinition query = new QueryDefinition($"SELECT c.id, c.{partitionKeyName} FROM c {filter}");
             QueryRequestOptions opt = new QueryRequestOptions() { MaxItemCount = 500, MaxBufferedItemCount = 500 };
 
-            var iterator = this._container.GetItemQueryIterator<dynamic>(query, requestOptions: opt);
+            var iterator = _container.GetItemQueryIterator<dynamic>(query, requestOptions: opt);
             int itemCount = 0;
             List<CosmosDbItem> entities = new List<CosmosDbItem>();
             while (iterator.HasMoreResults)
@@ -114,23 +114,23 @@
             var dicDelete = entities.GroupBy(x => x.PartitionKey).ToDictionary(x => x.Key, x => x.ToList());
             foreach (var deleteItem in dicDelete)
             {
-                TransactionalBatch batch = this._container.CreateTransactionalBatch(deleteItem.Key);
+                TransactionalBatch batch = _container.CreateTransactionalBatch(deleteItem.Key);
                 foreach (var item in deleteItem.Value)
                 {
-                    var deletionResult = await this._container.DeleteItemAsync<CosmosDbItem>(item.Id, item.PartitionKey);
-                    this._logger?.LogInformation("Deleting item {id}", item.Id);
+                    var deletionResult = await _container.DeleteItemAsync<CosmosDbItem>(item.Id, item.PartitionKey);
+                    _logger?.LogInformation("Deleting item {id}", item.Id);
 
                     itemCount++;
                 }
 
                 var result = await batch.ExecuteAsync();
-                foreach(var failure in result.Where(x => !x.IsSuccessStatusCode))
+                foreach (var failure in result.Where(x => !x.IsSuccessStatusCode))
                 {
-                    this._logger?.LogError("Failed to delete item {etag}", failure.ETag);
+                    _logger?.LogError("Failed to delete item {etag}", failure.ETag);
                 }
             }
         }
 
-        public async Task<string> GetPartitionKeyPathAsync() => (await this._container.ReadContainerAsync()).Resource.PartitionKeyPath;
+        public async Task<string> GetPartitionKeyPathAsync() => (await _container.ReadContainerAsync()).Resource.PartitionKeyPath;
     }
 }

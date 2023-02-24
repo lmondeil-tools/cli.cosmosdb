@@ -3,7 +3,10 @@
 using McMaster.Extensions.CommandLineUtils;
 
 [Command("settings")]
-[Subcommand(typeof(SettingsShow))]
+[Subcommand(
+    typeof(SettingsShow),
+    typeof(SettingsSetMaster)
+)]
 internal class SettingsMaster
 {
     private void OnExecute(CommandLineApplication app, IConsole console)

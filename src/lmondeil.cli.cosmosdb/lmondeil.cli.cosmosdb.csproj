@@ -18,24 +18,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\lmondeil.cli.cosmosdb.models\lmondeil.cli.cosmosdb.models.csproj" />
     <ProjectReference Include="..\lmondeil.cli.cosmosdb.services\lmondeil.cli.cosmosdb.services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="appSettings.prod.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="appSettings.uat.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="appSettings.dev.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="appSettings.template.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="appSettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
