@@ -10,6 +10,18 @@
     "patch-many": {
       "commandName": "Project",
       "commandLineArgs": "patch-many customer increment \"/patched\" 1 --where \"WHERE IS_DEFINED(c.patched)\""
+    },
+    "settings show": {
+      "commandName": "Project",
+      "commandLineArgs": "settings show"
+    },
+    "settings set database datahub dev": {
+      "commandName": "Project",
+      "commandLineArgs": "settings set database datahub dev"
+    },
+    "settings set connection-string cnx.dev dev": {
+      "commandName": "Project",
+      "commandLineArgs": "settings set connection-string cnx.dev dev"
     }
   }
 }

@@ -19,6 +19,9 @@
         [Argument(0)]
         public string Database { get; set; }
 
+        [Argument(1)]
+        public string? Environment { get; set; }
+
         public SettingsSetDatabase(IOptions<CosmosDbSettings> cosmosdbSettings, ILogger<SettingsSetDatabase> logger)
         {
             _cosmosdbSettings = cosmosdbSettings.Value;
@@ -28,7 +31,14 @@
         {
             try
             {
-                await SettingsService.SetDatabaseAsync(_cosmosdbSettings, this.Database);
+                if (string.IsNullOrWhiteSpace(Environment))
+                {
+                    await SettingsService.SetDatabaseAsync(_cosmosdbSettings, this.Database);
+                }
+                else
+                {
+                    await SettingsService.SetDatabaseAsync(this.Database, this.Environment);
+                }
                 _logger.LogInformation("Successfully set Database value : {database}", this.Database);
             }
             catch(Exception ex)
