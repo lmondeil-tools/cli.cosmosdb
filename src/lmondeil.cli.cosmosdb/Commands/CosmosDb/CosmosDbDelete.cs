@@ -30,6 +30,6 @@ internal class CosmosDbDelete
     {
         var repo = new CosmosDbRepository(_cosmosDbSettings.ConnectionString, _cosmosDbSettings.Database, ContainerName, _logger);
         var pkName = (await repo.GetPartitionKeyPathAsync()).TrimStart('/');
-        repo.DeleteAsync(Where, pkName);
+        await repo.DeleteAsync(Where, pkName);
     }
 }

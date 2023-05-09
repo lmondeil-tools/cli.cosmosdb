@@ -1,50 +1,47 @@
-﻿namespace lmondeil.cli.cosmosdb.Commands.Settings
+﻿namespace lmondeil.cli.cosmosdb.Commands.Settings;
+
+using lmondeil.cli.cosmosdb.Models.Settings;
+using lmondeil.cli.cosmosdb.services.Services;
+
+using McMaster.Extensions.CommandLineUtils;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+[Command("database")]
+internal class SettingsSetDatabase
 {
-    using lmondeil.cli.cosmosdb.Models.Settings;
-    using lmondeil.cli.cosmosdb.services.Services;
+    private readonly CosmosDbSettings _cosmosdbSettings;
+    private readonly ILogger _logger;
 
-    using McMaster.Extensions.CommandLineUtils;
+    [Argument(0)]
+    public string Database { get; set; }
 
-    using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
+    [Argument(1)]
+    public string? Environment { get; set; }
 
-    using System.Text.Json;
-
-    [Command("database")]
-    internal class SettingsSetDatabase
+    public SettingsSetDatabase(IOptions<CosmosDbSettings> cosmosdbSettings, ILogger<SettingsSetDatabase> logger)
     {
-        private readonly CosmosDbSettings _cosmosdbSettings;
-        private readonly ILogger _logger;
-
-        [Argument(0)]
-        public string Database { get; set; }
-
-        [Argument(1)]
-        public string? Environment { get; set; }
-
-        public SettingsSetDatabase(IOptions<CosmosDbSettings> cosmosdbSettings, ILogger<SettingsSetDatabase> logger)
+        _cosmosdbSettings = cosmosdbSettings.Value;
+        _logger = logger;
+    }
+    private async Task OnExecuteAsync(CommandLineApplication app)
+    {
+        try
         {
-            _cosmosdbSettings = cosmosdbSettings.Value;
-            _logger = logger;
+            if (string.IsNullOrWhiteSpace(Environment))
+            {
+                await SettingsService.SetDatabaseAsync(_cosmosdbSettings, this.Database);
+            }
+            else
+            {
+                await SettingsService.SetDatabaseAsync(this.Database, this.Environment);
+            }
+            _logger.LogInformation("Successfully set Database value : {database}", this.Database);
         }
-        private async Task OnExecuteAsync(CommandLineApplication app)
+        catch(Exception ex)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(Environment))
-                {
-                    await SettingsService.SetDatabaseAsync(_cosmosdbSettings, this.Database);
-                }
-                else
-                {
-                    await SettingsService.SetDatabaseAsync(this.Database, this.Environment);
-                }
-                _logger.LogInformation("Successfully set Database value : {database}", this.Database);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex, "Failed to set Database value : {database}\n{error}", this.Database, ex.Message);
-            }
+            _logger.LogError(ex, "Failed to set Database value : {database}\n{error}", this.Database, ex.Message);
         }
     }
 }

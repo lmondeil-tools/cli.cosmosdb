@@ -34,13 +34,21 @@ public class SettingsService
         await SaveSettingsAsync(cosmosDbSettings, environment);
     }
 
-    public static async Task SwitchSettings(string environment)
+    public static async Task SwitchSettingsAsync(string environment)
     {
-        string sourceFilePath = Path.Combine(Environment.CurrentDirectory, $"appSettings.{environment}.json");
-        string targetFilePath = Path.Combine(Environment.CurrentDirectory, "appSettings.json");
+        string sourceFilePath = Path.Combine(Directory.GetCurrentDirectory(), $"appSettings.{environment}.json");
+        string targetFilePath = Path.Combine(Directory.GetCurrentDirectory(), "appSettings.json");
         if (!File.Exists(sourceFilePath))
             throw new FileNotFoundException();
-        File.Copy(sourceFilePath, targetFilePath);
+        File.Copy(sourceFilePath, targetFilePath, true);
+    }
+    public static async Task DeleteAsync(string environment)
+    {
+        if (string.IsNullOrWhiteSpace(environment))
+            throw new ApplicationException("default settings cannot be deleted");
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), $"appSettings.{environment}.json");
+        if (File.Exists(filePath))
+            File.Delete(filePath);
     }
 
     private static async Task SaveSettingsAsync(CosmosDbSettings cosmosDbSettings, string? environment = null)
@@ -48,13 +56,13 @@ public class SettingsService
         var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
         var allSettings = new AllSettings(cosmosDbSettings);
         await File.WriteAllTextAsync(
-            Path.Combine(Environment.CurrentDirectory, string.IsNullOrWhiteSpace(environment) ? "appSettings.json" : $"appSettings.{environment}.json"),
+            Path.Combine(Directory.GetCurrentDirectory(), string.IsNullOrWhiteSpace(environment) ? "appSettings.json" : $"appSettings.{environment}.json"),
             JsonSerializer.Serialize(allSettings, options: serializerOptions));
     }
 
     private static async Task<AllSettings> LoadSettingsAsync(string environment)
     {
-        string filePath = Path.Combine(Environment.CurrentDirectory, string.IsNullOrWhiteSpace(environment) ? "appSettings.json" : $"appSettings.{environment}.json");
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), string.IsNullOrWhiteSpace(environment) ? "appSettings.json" : $"appSettings.{environment}.json");
 
         if(!File.Exists(filePath))
             return new AllSettings(new CosmosDbSettings());

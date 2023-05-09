@@ -13,7 +13,7 @@
 		<ToolCommandName>lmcosmos</ToolCommandName>
 
 		<PackageId>lmondeil.cli.cosmosdb</PackageId>
-		<Version>1.0.4</Version>
+		<Version>1.0.9</Version>
 		<Authors>Laurent MONDEIL</Authors>
 		<Company>none</Company>
 	

@@ -91,17 +91,6 @@ Options:
   -?|-h|--help   Show help information.
 Example: delete persons "WHERE c.lastName = 'DUPONT'"
 -----------------------------------------------------------
-	lmcosmos switchto
------------------------------------------------------------
-Usage: lmcosmos switchto [options] <ConfigurationName>
-
-Arguments:
-  ConfigurationName  
-
-Options:
-  -?|-h|--help       Show help information.
-Example: switchto test
------------------------------------------------------------
 	lmcosmos settings
 -----------------------------------------------------------
 Usage: lmcosmos settings [command] [options]
@@ -110,8 +99,10 @@ Options:
   -?|-h|--help  Show help information.
 
 Commands:
+  delete        
   set           
   show          
+  switchto      
 
 Run 'settings [command] -?|-h|--help' for more information about a command.
 
@@ -124,7 +115,18 @@ Options:
   -?|-h|--help  Show help information.
 
 -----------------------------------------------------------
-	lmcosmos settings set
+	lmcosmos settings switchto
+-----------------------------------------------------------
+Usage: lmcosmos settings switchto [options] <Environment>
+
+Arguments:
+  Environment   
+
+Options:
+  -?|-h|--help  Show help information.
+
+-----------------------------------------------------------
+	set
 -----------------------------------------------------------
 Usage: lmcosmos settings set [command] [options]
 
@@ -156,7 +158,18 @@ Usage: lmcosmos settings set database [options] <Database> <Environment>
 
 Arguments:
   Database      
-  Environment
+  Environment   
+
+Options:
+  -?|-h|--help  Show help information.
+
+-----------------------------------------------------------
+	lmcosmos settings delete
+-----------------------------------------------------------
+Usage: lmcosmos settings delete [options] <Environment>
+
+Arguments:
+  Environment   
 
 Options:
   -?|-h|--help  Show help information.

@@ -2,6 +2,7 @@
 
 using McMaster.Extensions.CommandLineUtils;
 
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 internal static class CommandLineApplicationExtensions
@@ -14,7 +15,7 @@ internal static class CommandLineApplicationExtensions
         app.ShowHelp();
         foreach (var cmd in app.Commands)
         {
-            cmd.ShowFullHelp(console);
+            cmd.ShowFullHelp(console!);
         }
     }
 

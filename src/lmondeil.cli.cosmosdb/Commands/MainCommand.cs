@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 // Here are registered available commands.
 // CHANGE "Command" attribute : replace MyCli by your cli name
-// REMOVE all except ShowFullHelp - REMOVE corresponding folders in [Commands] folder
+// REMOVE all except ShowFullHelp - REMOVE corresponding folders in [Commands] folder   
 // ADD and register yours
 [Command("lmcosmos")]
 [Subcommand(
@@ -19,7 +19,6 @@ using Microsoft.Extensions.Logging;
     typeof(CosmosDbPatch),
     typeof(CosmosDbPatchMany),
     typeof(CosmosDbDelete),
-    typeof(SwitchTo),
     typeof(SettingsMaster)
 )]
 internal class MainCommand

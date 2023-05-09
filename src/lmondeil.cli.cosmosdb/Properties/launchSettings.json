@@ -1,8 +1,5 @@
 {
   "profiles": {
-    "lmondeil.clitemplate": {
-      "commandName": "Project"
-    },
     "select": {
       "commandName": "Project",
       "commandLineArgs": "select offer \"SELECT TOP 2 c.id FROM c\""
@@ -22,6 +19,9 @@
     "settings set connection-string cnx.dev dev": {
       "commandName": "Project",
       "commandLineArgs": "settings set connection-string cnx.dev dev"
+    },
+    "lmcosmos": {
+      "commandName": "Project"
     }
   }
 }
