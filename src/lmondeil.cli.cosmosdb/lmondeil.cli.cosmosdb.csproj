@@ -13,7 +13,7 @@
 		<ToolCommandName>lmcosmos</ToolCommandName>
 
 		<PackageId>lmondeil.cli.cosmosdb</PackageId>
-		<Version>1.0.9</Version>
+		<Version>1.0.10-beta</Version>
 		<Authors>Laurent MONDEIL</Authors>
 		<Company>none</Company>
 	
@@ -49,7 +49,7 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="appSettings.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		
 		<None Include="readme.md" Pack="true" PackagePath="\" />

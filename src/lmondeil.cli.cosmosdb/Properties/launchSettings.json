@@ -22,6 +22,10 @@
     },
     "lmcosmos": {
       "commandName": "Project"
+    },
+    "delete": {
+      "commandName": "Project",
+      "commandLineArgs": "delete product \"WHERE c.id IN ('c4c82198-d89d-4131-bf31-ac7c454eca48', '569cd8da-458f-421d-907b-ca78194e788a', 'b8ff5997-4682-4298-ab74-a5d96c2403ed', '24cc68e0-6f16-4137-8098-d5b94b05635a', '24bb7fa6-aacf-4b05-952c-c1fd19e66c40', '34fa8d26-08eb-4452-ac3c-986965476481', 'ef69051b-5a75-48db-976e-5f405c051212')\" -m 4"
     }
   }
 }

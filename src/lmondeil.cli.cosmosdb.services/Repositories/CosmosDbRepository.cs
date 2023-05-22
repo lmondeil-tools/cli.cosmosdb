@@ -81,7 +81,7 @@
             return response.StatusCode;
         }
 
-        public async Task DeleteAsync(string filter, string partitionKeyName)
+        public async Task DeleteAsync(string filter, string partitionKeyName, int maxDegreeOfParallelism)
         {
             QueryDefinition query = new QueryDefinition($"SELECT c.id, c.{partitionKeyName} FROM c {filter}");
             QueryRequestOptions opt = new QueryRequestOptions() { MaxItemCount = 500, MaxBufferedItemCount = 500 };
@@ -112,21 +112,26 @@
 
             // Delete items
             var dicDelete = entities.GroupBy(x => x.PartitionKey).ToDictionary(x => x.Key, x => x.ToList());
-            foreach (var deleteItem in dicDelete)
+            foreach (var deleteItemChunks in dicDelete.Chunk(maxDegreeOfParallelism))
             {
-                TransactionalBatch batch = _container.CreateTransactionalBatch(deleteItem.Key);
-                foreach (var item in deleteItem.Value)
+                List<Task> tasks = new ();
+                foreach(var chunkItem in deleteItemChunks)
                 {
-                    var deletionResult = await _container.DeleteItemAsync<CosmosDbItem>(item.Id, item.PartitionKey);
-                    _logger?.LogInformation("Deleting item {id}", item.Id);
-
-                    itemCount++;
-                }
-
-                var result = await batch.ExecuteAsync();
-                foreach (var failure in result.Where(x => !x.IsSuccessStatusCode))
-                {
-                    _logger?.LogError("Failed to delete item {etag}", failure.ETag);
+                    Task.WaitAll(chunkItem.Value.Select(document 
+                        => Task.Run(async () =>
+                        {
+                            _logger?.LogInformation("Deleting item #id:{id} - #partitionKey:{partitionKey}", document.Id, document.PartitionKey);
+                            try
+                            {
+                                await _container.DeleteItemAsync<CosmosDbItem>(document.Id, document.PartitionKey);
+                                _logger?.LogInformation("Succesfully deleted item #id:{id} - #partitionKey:{partitionKey}", document.Id, document.PartitionKey);
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger?.LogError(ex, "Failed to delete item #id:{id} - #partitionKey:{partitionKey}", document.Id, document.PartitionKey);
+                            }
+                        })
+                    ).ToArray());
                 }
             }
         }

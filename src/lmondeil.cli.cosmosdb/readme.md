@@ -85,7 +85,8 @@ Usage: lmcosmos delete [options] <ContainerName> <Where>
 
 Arguments:
   ContainerName  
-  Where          usage example : "WHERE c.property == 'value'"
+  Where          					usage example : "WHERE c.property == 'value'"
+  -m|--max-degree-of-parallelism
 
 Options:
   -?|-h|--help   Show help information.
