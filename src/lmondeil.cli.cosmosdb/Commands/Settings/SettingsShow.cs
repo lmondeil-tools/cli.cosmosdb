@@ -22,13 +22,13 @@ internal class SettingsShow
 
     private void OnExecute(CommandLineApplication app, IConsole console)
     {
-        console.WriteLine("Storage folder :" + Directory.GetCurrentDirectory());
+        console.WriteLine("Storage folder :" + AppContext.BaseDirectory);
 
         var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
         console.WriteLine(JsonSerializer.Serialize(_cosmosdbSettings, options: serializerOptions));
 
         console.WriteLine("Other environments : ");
-        var appSettingsFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "appSettings*.json");
+        var appSettingsFiles = Directory.GetFiles(AppContext.BaseDirectory, "appSettings*.json");
 
         foreach (var file in appSettingsFiles.ToList().Except(new[] { "appSettings.json" }))
         {

@@ -13,7 +13,7 @@
 		<ToolCommandName>lmcosmos</ToolCommandName>
 
 		<PackageId>lmondeil.cli.cosmosdb</PackageId>
-		<Version>1.0.10-beta</Version>
+		<Version>1.2.2</Version>
 		<Authors>Laurent MONDEIL</Authors>
 		<Company>none</Company>
 	
@@ -36,18 +36,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="appSettings.prod.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="appSettings.uat.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="appSettings.dev.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="appSettings.template.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="appSettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

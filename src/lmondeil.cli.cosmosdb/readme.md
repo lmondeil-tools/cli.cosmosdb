@@ -2,6 +2,37 @@
 
 This is a simple tool for basic Cosmos Db operations.
 
+# Common scenarios
+
+## set settings
+``` bash
+lmcosmos settings set connection-string AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
+lmcosmos settings set database SampleDB
+```
+
+## set new environment named staging
+Here we set "staging" environment settings then we use this environment
+``` bash
+lmcosmos settings set connection-string AccountEndpoint=https://localhost:8081/;AccountKey=C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw== staging
+lmcosmos settings set database SampleDB staging
+lmcosmos settings switchto staging
+```
+
+## do a select query
+``` bash
+lmcosmos select Persons "SELECT c.* FROM c WHERE c.age > 25"
+```
+
+## patch an item
+``` batch
+lmcosmos patch Persons 4cc7506f-b60e-4c04-bb2b-960737e80b83 set lastname Pierre String
+```
+
+## delete items
+``` batch
+lmcosmos delete Persons "WHERE c.age > 50"
+```
+
 -----------------------------------------------------------
 	lmcosmos
 -----------------------------------------------------------
