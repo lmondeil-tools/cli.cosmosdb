@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
     typeof(CosmosDbSelect),
     typeof(CosmosDbPatch),
     typeof(CosmosDbPatchMany),
+    typeof(CosmosDbPatchFile),
     typeof(CosmosDbDelete),
     typeof(SettingsMaster)
 )]
