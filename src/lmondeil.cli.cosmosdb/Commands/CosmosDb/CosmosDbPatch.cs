@@ -11,8 +11,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 [Command("patch", ExtendedHelpText = "Example: \n" +
-    "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set firstName \"Pierre\" string\n" +
-    "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set age 18 Int32 \n" +
+    "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set firstName \"Pierre\" System.String\n" +
+    "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set age 18 System.Int32 \n" +
+    "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set hobbies ['Surf', 'Kite surf'] System.String[] \n" +
     "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be increment age 3 \n" +
     "patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be delete teenager")]
 internal class CosmosDbPatch
@@ -35,7 +36,7 @@ internal class CosmosDbPatch
     [Argument(4)]
     public string Value { get; set; } = "";
 
-    [Argument(5, Description = "Exemples: String, Int32, ...")]
+    [Argument(5, Description = "Exemples: System.String, System.Int32, System.String[], ...")]
     public string ValueType { get; set; } = "";
 
     [Option(CommandOptionType.NoValue)]

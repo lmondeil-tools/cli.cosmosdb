@@ -13,8 +13,8 @@ using Microsoft.Extensions.Options;
 using System.Net;
 
 [Command("patch-many", ExtendedHelpText = "Example: \n" +
-    "patch persons set firstName \"Pierre\" string \"WHERE c.firstName = ''\"\n" +
-    "patch persons set age 18 Int32 \"WHERE c.firstName = 'Pierre' AND c.lastName = 'DUPONT'\"\n" +
+    "patch persons set firstName \"Pierre\" System.String \"WHERE c.firstName = ''\"\n" +
+    "patch persons set age 18 System.Int32 \"WHERE c.firstName = 'Pierre' AND c.lastName = 'DUPONT'\"\n" +
     "patch persons increment age 3 \"WHERE c.wasForgotten = true\"\n" +
     "patch persons delete teenager \"WHERE c.age = >= 18\"")]
 internal class CosmosDbPatchMany

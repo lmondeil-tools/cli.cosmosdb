@@ -12,13 +12,16 @@ namespace lmondeil.cli.cosmosdb.services.Helpers.tests
         static IEnumerable<object[]> BuildFromTestDataSource()
         {
             // Set basic with string value
-            yield return new object[] { new PatchEntity(PatchType.Set, "/name", "Pierre", "String"), PatchOperation.Set("/name", "Pierre"), typeof(string) };
+            yield return new object[] { new PatchEntity(PatchType.Set, "/name", "Pierre", "System.String"), PatchOperation.Set("/name", "Pierre"), typeof(string) };
 
             // Set basic with int value
-            yield return new object[] { new PatchEntity(PatchType.Set, "/age", "12", "Int32"), PatchOperation.Set("/age", 12), typeof(int) };
+            yield return new object[] { new PatchEntity(PatchType.Set, "/age", "12", "System.Int32"), PatchOperation.Set("/age", 12), typeof(int) };
+
+            // Set basic with string[] value
+            yield return new object[] { new PatchEntity(PatchType.Set, "/hobbies", "['surf', 'skate']", "System.String[]"), PatchOperation.Set("/hobbies", new string[] { "surf", "skate" }), typeof(string[]) };
 
             // Set having no "/" at the begining of the path
-            yield return new object[] { new PatchEntity(PatchType.Set, "name", "Pierre", "String"), PatchOperation.Set("/name", "Pierre"), typeof(string) };
+            yield return new object[] { new PatchEntity(PatchType.Set, "name", "Pierre", "System.String"), PatchOperation.Set("/name", "Pierre"), typeof(string) };
         }
 
         [TestMethod()]

@@ -53,9 +53,11 @@ Options:
   -s|--silently  Silently
   -?|-h|--help   Show help information.
 Example: 
-patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set firstName "Pierre" string
-patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set age 18 Int32 
+patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set firstName "Pierre" System.String
+patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set age 18 System.Int32 
+patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be set hobbies ['surf', 'skate'] System.String[]
 patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be increment age 3 
+
 patch persons d1e23f7d-ce7a-42ad-bc26-da296efb37be delete teenager
 -----------------------------------------------------------
 	lmcosmos patch-many
@@ -74,8 +76,8 @@ Arguments:
 Options:
   -?|-h|--help   Show help information.
 Example: 
-patch persons set firstName "Pierre" string "WHERE c.firstName = ''"
-patch persons set age 18 Int32 "WHERE c.firstName = 'Pierre' AND c.lastName = 'DUPONT'"
+patch persons set firstName "Pierre" System.Stringtring "WHERE c.firstName = ''"
+patch persons set age 18 System.Int32 "WHERE c.firstName = 'Pierre' AND c.lastName = 'DUPONT'"
 patch persons increment age 3 "WHERE c.wasForgotten = true"
 patch persons delete teenager "WHERE c.age = >= 18"
 -----------------------------------------------------------

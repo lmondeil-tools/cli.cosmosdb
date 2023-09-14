@@ -4,6 +4,8 @@ using lmondeil.cli.cosmosdb.services.Models;
 
 using Microsoft.Azure.Cosmos;
 
+using Newtonsoft.Json;
+
 using System;
 
 public class PatchOperationHelper
@@ -20,7 +22,21 @@ public class PatchOperationHelper
             _ => PatchOperation.Set
                 (
                     "/" + patchEntity.PropertyPath.TrimStart('/'),
-                    Convert.ChangeType(patchEntity.Value, Enum.Parse<TypeCode>(patchEntity.ValueTypeCode))
+                    GetValueFromStrings(patchEntity.Value, patchEntity.ValueTypeCode)
                 )
         };
+
+    private static object? GetValueFromStrings(string value, string valueTypeCode)
+    {
+        Type? returnType = Type.GetType(valueTypeCode);
+        if( returnType == null )
+        {
+            throw new ArgumentException($"Unable to get type from string {valueTypeCode}");
+        }
+
+        if (returnType.IsArray)
+            return JsonConvert.DeserializeObject(value, returnType);
+        else
+            return Convert.ChangeType(value, returnType);
+    }
 }
