@@ -25,7 +25,7 @@
     },
     "delete": {
       "commandName": "Project",
-      "commandLineArgs": "delete article \"WHERE c.id = 'nl-BE::3::39919330'\" -m 4"
+      "commandLineArgs": "delete article \"WHERE c.id = 'nl-BE::3::39909131'\" -m 4"
     },
     "patch-file": {
       "commandName": "Project",
