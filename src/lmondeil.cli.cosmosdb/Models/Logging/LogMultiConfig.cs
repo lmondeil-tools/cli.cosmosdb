@@ -16,7 +16,7 @@
 
         public LogMultiConfig ConfigureConsole()
         {
-            _loggerConfiguration.WriteTo.ColoredConsole();
+            _loggerConfiguration.WriteTo.Console();
 
             return this;
         }
